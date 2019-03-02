@@ -1,0 +1,28 @@
+
+parameters:
+    inori_twitter_app.file: null
+    inori_twitter_app.consumer_key: null
+    inori_twitter_app.consumer_secret: null
+    inori_twitter_app.oauth_token: null
+    inori_twitter_app.oauth_token_secret: null
+    inori_twitter_app.api.class: Abraham\TwitterOAuth\TwitterOAuth
+    inori_twitter_app.service.class: Inori\TwitterAppBundle\Services\TwitterApp
+
+services:
+    # default configuration for services in *this* file
+    #_defaults:
+    #    autowire: false
+
+    twitter_app:
+        class: "%inori_twitter_app.service.class%"
+        arguments:
+            - '@inori_twitter_app.api'
+
+    inori_twitter_app.api:
+        class: "%inori_twitter_app.api.class%"
+        file: '%inori_twitter_app.file%'
+        arguments:
+            $consumerKey: '%inori_twitter_app.consumer_key%'
+            $consumerSecret: '%inori_twitter_app.consumer_secret%'
+            $oauthToken: '%inori_twitter_app.oauth_token%'
+            $oauthTokenSecret: '%inori_twitter_app.oauth_token_secret%'
